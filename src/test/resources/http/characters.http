@@ -1,0 +1,11 @@
+### Create a new character
+POST http://localhost:8080/characters
+Content-Type: application/json
+{
+  "name": "John Doe",
+  "race": "Human",
+  "characterClass": "Warrior"
+}
+
+### Get character
+GET http://localhost:8080/characters/1
