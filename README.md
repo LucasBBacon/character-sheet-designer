@@ -58,8 +58,44 @@ Application will run on http://localhost:8080
 ### When creating a character:
 
 - **Name** must not be blank and maximum of 50 characters
-- **Race** must not be blank
-- **Class** must not be blank
+- **Race** must be one of:
+  - HUMAN
+  - ELF
+  - DWARF
+  - HALFLING
+  - ORC
+  - GOBLIN
+  - TIEFLING
+  - DRAGONBORN
+  - AASIMAR
+  - GENASI
+  - KOBOLD
+  - BUGBEAR
+  - FIRBOLG
+  - TABAXI
+  - TORTLE
+  - LIZARDFOLK
+  - CENTAUR
+  - MINOTAUR
+  - SATYR
+  - YUAN_TI
+- **Class** must be one of:
+  - BARBARIAN
+  - BARD
+  - CLERIC
+  - DRUID
+  - FIGHTER
+  - MONK
+  - PALADIN
+  - RANGER
+  - ROGUE
+  - SORCERER
+  - WARLOCK
+  - WIZARD
+  - ARTIFICER
+  - BLOOD_HUNTER
+- **Background** must not be blank
+- **Alignment** must not be blank
 - **Ability Scores** (Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma) must be between 1 and 20
 
 If any validation rule is violated, the server will respond with **400 Bad Request** and detailed error message.
@@ -74,8 +110,10 @@ curl -X POST http://localhost:8080/characters \
     -H "Content-Type: application/json" \
     -d '{
         "name": "John", 
-        "race": "Human", 
-        "characterClass": "Warrior",
+        "race": "HUMAN", 
+        "characterClass": "WARRIOR",
+        "background": "Soldier",
+        "alignment": "Lawful Good",
         "strength": 15,
         "dexterity": 12,
         "constitution": 14,

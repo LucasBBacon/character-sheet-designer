@@ -1,10 +1,7 @@
 // model/Character.java
 package com.lucasbbacon.charactersheetdesigner.model;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.util.Objects;
 
@@ -15,11 +12,17 @@ public class Character {
     @Size(max = 50, message = "Name must be less than 50 characters")
     private String name;
 
-    @NotBlank(message = "Race is mandatory")
-    private String race;
+    @NotNull(message = "Race is mandatory")
+    private Race race;
 
-    @NotBlank(message = "Class is mandatory")
-    private String characterClass;
+    @NotNull(message = "Class is mandatory")
+    private CharacterClass characterClass;
+
+    @NotBlank(message = "Background is mandatory")
+    private String background;
+
+    @NotBlank(message = "Alignment is mandatory")
+    private String alignment;
 
     @Min(value = 1, message = "Strength must be at least 1")
     @Max(value = 20, message = "Strength must be at most 20")
@@ -63,20 +66,36 @@ public class Character {
         this.name = name;
     }
 
-    public String getRace() {
+    public Race getRace() {
         return race;
     }
 
-    public void setRace(String race) {
+    public void setRace(Race race) {
         this.race = race;
     }
 
-    public String getCharacterClass() {
+    public CharacterClass getCharacterClass() {
         return characterClass;
     }
 
-    public void setCharacterClass(String characterClass) {
+    public void setCharacterClass(CharacterClass characterClass) {
         this.characterClass = characterClass;
+    }
+
+    public String getBackground() {
+        return background;
+    }
+
+    public void setBackground(String background) {
+        this.background = background;
+    }
+
+    public String getAlignment() {
+        return alignment;
+    }
+
+    public void setAlignment(String alignment) {
+        this.alignment = alignment;
     }
 
     public int getStrength() {

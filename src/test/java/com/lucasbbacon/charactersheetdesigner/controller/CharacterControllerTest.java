@@ -1,9 +1,7 @@
 package com.lucasbbacon.charactersheetdesigner.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lucasbbacon.charactersheetdesigner.model.Character;
 import com.lucasbbacon.charactersheetdesigner.service.CharacterService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -28,50 +26,37 @@ public class CharacterControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private Character validCharacter;
-
-    @BeforeEach
-    void setUp() {
-        validCharacter = createValidCharacter();
-    }
-
     @Test
     void testCreateCharacter_validInput_returnsCreatedCharacter() throws Exception {
         mockMvc.perform(post("/characters")
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper.writeValueAsString(validCharacter)))
+                    .content(objectMapper.writeValueAsString(createValidCharacter())))
                 .andExpect(status().isOk());
     }
 
     @Test
     void testCreateCharacter_missingName_returnsBadRequest() throws Exception {
-        validCharacter.setName("");
-
         mockMvc.perform(post("/characters")
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper.writeValueAsString(validCharacter)))
+                    .content(objectMapper.writeValueAsString(createCharacterWithInvalidName())))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.name").value("Name is mandatory"));
     }
 
     @Test
     void testCreateCharacter_missingRace_returnsBadRequest() throws Exception {
-        validCharacter.setRace("");
-
         mockMvc.perform(post("/characters")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(validCharacter)))
+                        .content(objectMapper.writeValueAsString(createCharacterWithInvalidRace())))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.race").value("Race is mandatory"));
     }
 
     @Test
     void testCreateCharacter_missingClass_returnsBadRequest() throws Exception {
-        validCharacter.setCharacterClass("");
-
         mockMvc.perform(post("/characters")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(validCharacter)))
+                        .content(objectMapper.writeValueAsString(createCharacterWithInvalidClass())))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.characterClass").value("Class is mandatory"));
     }
@@ -92,5 +77,23 @@ public class CharacterControllerTest {
                         .content(objectMapper.writeValueAsString(createCharacterWithInvalidDexterity())))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.dexterity").value("Dexterity must be at least 1"));
+    }
+
+    @Test
+    void testCreateCharacter_missingBackground_returnsBadRequest() throws Exception {
+        mockMvc.perform(post("/characters")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(createCharacterWithMissingBackground())))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.background").value("Background is mandatory"));
+    }
+
+    @Test
+    void testCreateCharacter_missingAlignment_returnsBadRequest() throws Exception {
+        mockMvc.perform(post("/characters")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(createCharacterWithMissingAlignment())))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.alignment").value("Alignment is mandatory"));
     }
 }

@@ -2,6 +2,8 @@ package com.lucasbbacon.charactersheetdesigner.service;
 
 import com.lucasbbacon.charactersheetdesigner.model.Character;
 
+import com.lucasbbacon.charactersheetdesigner.model.CharacterClass;
+import com.lucasbbacon.charactersheetdesigner.model.Race;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,8 +16,8 @@ public class CharacterServiceTest {
         CharacterService service = new CharacterService();
         Character character = new Character();
         character.setName("Test");
-        character.setRace("Elf");
-        character.setCharacterClass("Wizard");
+        character.setRace(Race.ELF);
+        character.setCharacterClass(CharacterClass.WIZARD);
 
         Character created = service.createCharacter(character);
         assertNotNull(created.getId());
@@ -27,8 +29,8 @@ public class CharacterServiceTest {
         CharacterService service = new CharacterService();
         Character character = new Character();
         character.setName("Test");
-        character.setRace("Elf");
-        character.setCharacterClass("Wizard");
+        character.setRace(Race.ELF);
+        character.setCharacterClass(CharacterClass.WIZARD);
 
         Character created = service.createCharacter(character);
         Character fetched = service.getCharacter(created.getId());
