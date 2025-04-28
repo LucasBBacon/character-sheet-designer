@@ -32,24 +32,30 @@ An online backend service for creating Dungeons and Dragons homebrew characters,
 ### Running Locally
 
 1. Clone the project:
-
-```bash
-git clone https://github.com/lucasbbacon/character-sheet-deisgner.git
-cd character-sheet-designer
-```
+    ```bash
+    git clone https://github.com/lucasbbacon/character-sheet-deisgner.git
+    cd character-sheet-designer
+    ```
 
 2. Build the project:
-
-```bash
-mvn spring-boot:run
-```
+    ```bash
+    mvn spring-boot:run
+    ```
 Application will run on http://localhost:8080
 
 ---
 
 ## API Endpoints:
-- `POST /api/characters` - Create a new character (now includes ability scores)
-- `GET /api/characters/{id}` - Retrieve character information by ID
+| Method | Endpoint              | Description              |
+|:------:|:----------------------|:-------------------------|
+|  POST  | `/characters`         | Create a new character   |
+|  GET   | `/characters/{id}`    | Retrieve character       |
+|  GET   | `/characters/races`   | List all allowed races   |
+|  GET   | `/characters/classes` | List all allowed classes |
+
+Use these endpoints to dynamically fetch allowed values:
+- `GET /characters/races` -> Returns a list of allowed Races
+- `GET /characters/classes` -> Returns a list of allowed Classes
 
 ---
 

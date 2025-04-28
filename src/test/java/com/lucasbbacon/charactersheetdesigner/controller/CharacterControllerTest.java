@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static com.lucasbbacon.charactersheetdesigner.util.CharacterTestFactory.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -95,5 +96,21 @@ public class CharacterControllerTest {
                         .content(objectMapper.writeValueAsString(createCharacterWithMissingAlignment())))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.alignment").value("Alignment is mandatory"));
+    }
+
+    @Test
+    void testGetAllRaces_returnsListOfRaces() throws Exception {
+        mockMvc.perform(get("/characters/races"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$[0]").value("HUMAN"));
+    }
+
+    @Test
+    void testGetAllClasses_returnsListOfClasses() throws Exception {
+        mockMvc.perform(get("/characters/classes"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$[0]").value("BARBARIAN"));
     }
 }
