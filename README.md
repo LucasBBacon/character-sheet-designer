@@ -47,29 +47,52 @@ Application will run on http://localhost:8080
 
 ---
 
-### API Endpoints:
-- `POST /api/characters` - Create a new character
+## API Endpoints:
+- `POST /api/characters` - Create a new character (now includes ability scores)
 - `GET /api/characters/{id}` - Retrieve character information by ID
 
 ---
 
-### Example Request
+## Validation Rules
 
-Create a new character:
+### When creating a character:
+
+- **Name** must not be blank and maximum of 50 characters
+- **Race** must not be blank
+- **Class** must not be blank
+- **Ability Scores** (Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma) must be between 1 and 20
+
+If any validation rule is violated, the server will respond with **400 Bad Request** and detailed error message.
+
+---
+
+## Example Request
+
+### Create a new character:
 ```bash
 curl -X POST http://localhost:8080/characters \
     -H "Content-Type: application/json" \
-    -d '{"name": "John", "race": "Human", "characterClass": "Warrior"}'
+    -d '{
+        "name": "John", 
+        "race": "Human", 
+        "characterClass": "Warrior",
+        "strength": 15,
+        "dexterity": 12,
+        "constitution": 14,
+        "intelligence": 10,
+        "wisdom": 8,
+        "charisma": 13
+    }'
 ```
 
-Retrieve a Character:
+### Retrieve a Character:
 ```bash
 curl http://localhost:8080/characters/1
 ```
 
 ---
 
-### Running Tests:
+## Running Tests:
 
 ```bash
 mvn test
@@ -79,7 +102,9 @@ mvn test
 
 ## Future Ideas
 
-- Add ability scores, background, and equipment
+- Add ability score generation methods (point buy, dice roll, standard array)
+- Calculate ability modifiers based on scores
+- Background and equipment
 - Support saving/loading characters from a database
 - Build a simple frontend to interact with the API
 - Export character sheets as PDF

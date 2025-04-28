@@ -9,6 +9,12 @@ public class CharacterTestFactory {
         character.setName("Test");
         character.setRace("Elf");
         character.setCharacterClass("Wizard");
+        character.setStrength(10);
+        character.setDexterity(14);
+        character.setConstitution(12);
+        character.setIntelligence(15);
+        character.setWisdom(13);
+        character.setCharisma(11);
         return character;
     }
 
@@ -27,6 +33,18 @@ public class CharacterTestFactory {
     public static Character createCharacterWithInvalidClass() {
         Character character = createValidCharacter();
         character.setCharacterClass(""); // Invalid
+        return character;
+    }
+
+    public static Character createCharacterWithInvalidStrength() {
+        Character character = createValidCharacter();
+        character.setStrength(25); // Invalid strength
+        return character;
+    }
+
+    public static Character createCharacterWithInvalidDexterity() {
+        Character character = createValidCharacter();
+        character.setDexterity(0); // Invalid dexterity
         return character;
     }
 }

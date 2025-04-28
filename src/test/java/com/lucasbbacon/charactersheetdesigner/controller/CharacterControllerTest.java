@@ -11,7 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static com.lucasbbacon.charactersheetdesigner.util.CharacterTestFactory.createValidCharacter;
+import static com.lucasbbacon.charactersheetdesigner.util.CharacterTestFactory.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -74,5 +74,23 @@ public class CharacterControllerTest {
                         .content(objectMapper.writeValueAsString(validCharacter)))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.characterClass").value("Class is mandatory"));
+    }
+
+    @Test
+    void testCreateCharacter_invalidStrength_returnsBadRequest() throws Exception {
+        mockMvc.perform(post("/characters")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(createCharacterWithInvalidStrength())))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.strength").value("Strength must be at most 20"));
+    }
+
+    @Test
+    void testCreateCharacter_invalidDexterity_returnsBadRequest() throws Exception {
+        mockMvc.perform(post("/characters")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(createCharacterWithInvalidDexterity())))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.dexterity").value("Dexterity must be at least 1"));
     }
 }
