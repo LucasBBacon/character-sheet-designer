@@ -2,6 +2,8 @@ package com.lucasbbacon.charactersheetdesigner.controller;
 
 import com.lucasbbacon.charactersheetdesigner.model.Character;
 import com.lucasbbacon.charactersheetdesigner.service.CharacterService;
+import jakarta.validation.Valid;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,7 +17,8 @@ public class CharacterController {
     }
 
     @PostMapping
-    public Character createCharacter(@RequestBody Character character) {
+    @Validated
+    public Character createCharacter(@RequestBody @Valid Character character) {
         return characterService.createCharacter(character);
     }
 
