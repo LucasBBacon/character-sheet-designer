@@ -46,12 +46,17 @@ Application will run on http://localhost:8080
 ---
 
 ## API Endpoints:
-| Method | Endpoint              | Description              |
-|:------:|:----------------------|:-------------------------|
-|  POST  | `/characters`         | Create a new character   |
-|  GET   | `/characters/{id}`    | Retrieve character       |
-|  GET   | `/characters/races`   | List all allowed races   |
-|  GET   | `/characters/classes` | List all allowed classes |
+| Method | Endpoint                      | Description                           |
+|:------:|:------------------------------|:--------------------------------------|
+|  POST  | `/characters`                 | Create a new character                |
+|  GET   | `/characters/{id}`            | Retrieve character                    |
+|  PUT   | `/characters/{id}`            | Update character                      |
+| DELETE | `/characters/{id}`            | Delete character                      |
+|  GET   | `/characters`                 | List all characters                   |
+|  GET   | `/characters/races`           | List all allowed races                |
+|  GET   | `/characters/races/{race}`    | List all characters filtered by race  |
+|  GET   | `/characters/classes`         | List all allowed classes              |
+|  GET   | `/characters/classes/{class}` | List all characters filtered by class |
 
 Use these endpoints to dynamically fetch allowed values:
 - `GET /characters/races` -> Returns a list of allowed Races
@@ -111,28 +116,46 @@ If any validation rule is violated, the server will respond with **400 Bad Reque
 ## Example Request
 
 ### Create a new character:
-```bash
-curl -X POST http://localhost:8080/characters \
-    -H "Content-Type: application/json" \
-    -d '{
-        "name": "John", 
-        "race": "HUMAN", 
-        "characterClass": "WARRIOR",
-        "background": "Soldier",
-        "alignment": "Lawful Good",
-        "strength": 15,
-        "dexterity": 12,
-        "constitution": 14,
-        "intelligence": 10,
-        "wisdom": 8,
-        "charisma": 13
-    }'
+
+POST `/characters`
+
+Body:
+```json
+{
+  "name": "John", 
+  "race": "HUMAN", 
+  "characterClass": "WARRIOR",
+  "background": "Soldier",
+  "alignment": "Lawful Good",
+  "strength": 15,
+  "dexterity": 12,
+  "constitution": 14,
+  "intelligence": 10,
+  "wisdom": 8,
+  "charisma": 13
+}
 ```
+
+### Updating a character:
+PUT `/characters/{id}`
+
+Body: (Similar to post but updated fields)
+
+### Delete a character:
+DELETE `/characters/{id}`
+
+No body required.
 
 ### Retrieve a Character:
 ```bash
 curl http://localhost:8080/characters/1
 ```
+
+### Filtering by Race or Class
+
+GET `/characters/race/{race}`
+
+GET `/characters/class/{characterClass}`
 
 ---
 

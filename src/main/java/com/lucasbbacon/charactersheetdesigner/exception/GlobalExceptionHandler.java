@@ -62,4 +62,11 @@ public class GlobalExceptionHandler extends RuntimeException {
                 .collect(Collectors.joining(", "))
                 + "]";
     }
+
+    @ExceptionHandler(CharacterNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleCharacterNotFound(CharacterNotFoundException ex) {
+        Map<String, String> error = new HashMap<>();
+        error.put("error", ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
 }

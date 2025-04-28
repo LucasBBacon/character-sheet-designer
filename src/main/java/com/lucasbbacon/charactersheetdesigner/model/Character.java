@@ -1,11 +1,16 @@
 // model/Character.java
 package com.lucasbbacon.charactersheetdesigner.model;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 import java.util.Objects;
 
+@Entity
+@Table(name = "characters")
 public class Character {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "Name is mandatory")

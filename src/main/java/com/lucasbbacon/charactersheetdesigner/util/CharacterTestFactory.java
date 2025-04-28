@@ -22,6 +22,14 @@ public class CharacterTestFactory {
         return character;
     }
 
+    public static Character createAnotherValidCharacter() {
+        Character character = createValidCharacter();
+        character.setName("Another Test");
+        character.setRace(Race.HUMAN);
+        character.setCharacterClass(CharacterClass.FIGHTER);
+        return character;
+    }
+
     public static Character createCharacterWithInvalidName() {
         Character character = createValidCharacter();
         character.setName(""); // Invalid name

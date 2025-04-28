@@ -32,6 +32,33 @@ public class CharacterController {
         return characterService.getCharacter(id);
     }
 
+    @PutMapping("/{id}")
+    @Validated
+    public Character updateCharacter(@PathVariable Long id,
+                                     @RequestBody @Valid Character updatedCharacter) {
+        return characterService.updateCharacter(id, updatedCharacter);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteCharacter(@PathVariable Long id) {
+        characterService.deleteCharacter(id);
+    }
+
+    @GetMapping("/race/{race}")
+    public List<Character> getCharactersByRace(@PathVariable Race race) {
+        return characterService.getCharacterByRace(race);
+    }
+
+    @GetMapping("/class/{characterClass}")
+    public List<Character> getCharactersByClass(@PathVariable CharacterClass characterClass) {
+        return characterService.getCharacterByClass(characterClass);
+    }
+
+    @GetMapping
+    public List<Character> getAllCharacters() {
+        return characterService.getAllCharacters();
+    }
+
     @GetMapping("/races")
     public List<String> getAllRaces() {
         return Arrays.stream(Race.values()).map(Enum::name).toList();
