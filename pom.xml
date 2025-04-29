@@ -3,8 +3,8 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.lucasbbacon</groupId>
   <artifactId>character-sheet-designer</artifactId>
-  <packaging>war</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <version>0.0.1-SNAPSHOT</version>
   <name>Character Sheet Designer</name>
   <description>A simple Spring Boot backend for DnD character creation</description>
   <parent>
@@ -58,6 +58,14 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>3.2.4</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
