@@ -1,6 +1,18 @@
 # .dockerignore
-target/
+#target/
 .git/
 .gitignore
 *.md
 *.log
+
+### IntelliJ IDEA ###
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
+*.iws
+*.iml
+*.ipr
+
+### VS Code ###
+.vscode/

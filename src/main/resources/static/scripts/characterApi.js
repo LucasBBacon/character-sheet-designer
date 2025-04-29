@@ -1,6 +1,7 @@
 const API_URL = "http://localhost:8080/characters";
 
 async function postCharacter(character) {
+    console.log('Posting character: ', character);
     const response = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type' : 'application/json' },
