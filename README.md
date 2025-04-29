@@ -1,4 +1,5 @@
 # Character Sheet Designer
+![Build](https://github.com/LucasBBacon/character-sheet-designer/actions/workflows/ci.yml/badge.svg)
 
 An online backend service for creating Dungeons and Dragons homebrew characters, built with Java and Spring Boot.
 

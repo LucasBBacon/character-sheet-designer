@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles/style.css">
+    <title>Character Sheet Designer</title>
+</head>
+<body>
+    <h1>Create Character</h1>
+
+    <form id="character-form">
+        <input type="text" id="name" placeholder="Name" required><br>
+        <input type="text" id="race" placeholder="Race (e.g. ELF)" required><br>
+        <input type="text" id="class" placeholder="Class (e.g. WARRIOR)" required><br>
+        <input type="text" id="background" placeholder="Background (e.g. NOBLE)" required><br>
+        <input type="text" id="alignment" placeholder="Alignment (e.g. LAWFUL_GOOD)" required><br>
+        <input type="number" id="strength" placeholder="Strength" required><br>
+        <input type="number" id="dexterity" placeholder="Dexterity" required><br>
+        <input type="number" id="constitution" placeholder="Constitution" required><br>
+        <input type="number" id="intelligence" placeholder="Intelligence" required><br>
+        <input type="number" id="wisdom" placeholder="Wisdom" required><br>
+        <input type="number" id="charisma" placeholder="Charisma" required><br>
+        <button type="submit">Create Character</button>
+    </form>
+
+    <h2>Character List</h2>
+    <ul id="character-list"></ul>
+
+    <script src="scripts/characterApi.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
+</html>
