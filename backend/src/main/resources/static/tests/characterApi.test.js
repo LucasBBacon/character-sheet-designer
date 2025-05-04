@@ -31,4 +31,27 @@ describe('Character API', () => {
         expect(fetch).toHaveBeenCalledTimes(1);
         expect(Array.isArray(result)).toBe(true);
     });
+
+    test('assigns standard array values to ability scores', () => {
+        document.body.innerHTML = `
+            <input id="strength">
+            <input id="dexterity">
+            <input id="constitution">
+            <input id="intelligence">
+            <input id="wisdom">
+            <input id="charisma">
+            <button id="standard-array-btn"></button>
+        `;
+
+        require('../scripts/main.js'); // Assuming main.js contains the event listener
+
+        document.getElementById('standard-array-btn').click();
+
+        expect(document.getElementById('strength').value).toBe('15');
+        expect(document.getElementById('dexterity').value).toBe('14');
+        expect(document.getElementById('constitution').value).toBe('13');
+        expect(document.getElementById('intelligence').value).toBe('12');
+        expect(document.getElementById('wisdom').value).toBe('10');
+        expect(document.getElementById('charisma').value).toBe('8');
+    });
 });

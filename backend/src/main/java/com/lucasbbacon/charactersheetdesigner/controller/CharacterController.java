@@ -68,4 +68,10 @@ public class CharacterController {
     public List<String> getAllClasses() {
         return Arrays.stream(CharacterClass.values()).map(Enum::name).toList();
     }
+
+    @PostMapping("/{id}/assign-standard-array")
+    public Character assignStandardArrayToCharacter(@PathVariable Long id, @RequestBody List<String> assignmentOrder) {
+        Character character = characterService.getCharacter(id);
+        return characterService.assignStandardArray(character, assignmentOrder);
+    }
 }

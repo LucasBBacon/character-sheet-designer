@@ -6,7 +6,6 @@ import com.lucasbbacon.charactersheetdesigner.model.Character;
 import com.lucasbbacon.charactersheetdesigner.model.CharacterClass;
 import com.lucasbbacon.charactersheetdesigner.model.Race;
 import com.lucasbbacon.charactersheetdesigner.repository.CharacterRepository;
-import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -60,5 +59,29 @@ public class CharacterService {
 
     public List<Character> getCharacterByClass(CharacterClass characterClass) {
         return repository.findByCharacterClass(characterClass);
+    }
+
+    public Character assignStandardArray(Character character, List<String> assignmentOrder) {
+        int[] standardArray = {15, 14, 13, 12, 10, 8};
+
+        if (assignmentOrder.size() != 6) {
+            throw new IllegalArgumentException("Must provide an assignment for all 6 ability scores.");
+        }
+
+        for (int i=0; i<6; i++) {
+            String ability = assignmentOrder.get(i).toLowerCase();
+            int value = standardArray[i];
+
+            switch (ability) {
+                case "strength" -> character.setStrength(value);
+                case "dexterity" -> character.setDexterity(value);
+                case "constitution" -> character.setConstitution(value);
+                case "intelligence" -> character.setIntelligence(value);
+                case "wisdom" -> character.setWisdom(value);
+                case "charisma" -> character.setCharisma(value);
+                default -> throw new IllegalArgumentException("Invalid ability: " + ability);
+            }
+        }
+        return character;
     }
 }

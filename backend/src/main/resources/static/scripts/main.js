@@ -45,3 +45,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadCharacters();
 });
+
+document.getElementById('standard-array-btn').addEventListener('click', () => {
+    const standardArray = [15, 14, 13, 12, 10, 8];
+    const abilityIds = [
+        'strength', 
+        'dexterity', 
+        'constitution', 
+        'intelligence', 
+        'wisdom', 
+        'charisma'
+    ];
+
+    for (let i = 0; i < abilityIds.length; i++) {
+        document.getElementById(abilityIds[i]).value = standardArray[i];
+    }
+});
